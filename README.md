@@ -112,3 +112,4 @@ Esta aplicação é arquitetada primariamente para deploy na plataforma [Vercel]
    ```bash
    npm run db:generate && npm run db:migrate && npm run build
    ```
+.
