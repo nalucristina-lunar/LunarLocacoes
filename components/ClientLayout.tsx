@@ -7,6 +7,9 @@ import AdminToolbar from "@/components/admin/AdminToolbar";
 import { SettingsProvider } from '@/context/WhatsAppContext';
 import { AdminUser } from '@/lib/controllers/AuthController';
 import { Toaster } from 'react-hot-toast';
+import { CartProvider } from '@/context/CartContext';
+import BagFloatingButton from '@/components/BagFloatingButton';
+import BagModal from '@/components/BagModal';
 
 export default function ClientLayout({
     children,
@@ -30,21 +33,31 @@ export default function ClientLayout({
 
     return (
         <SettingsProvider initialWhatsapp={whatsapp} initialEmail={email}>
-            <Toaster
-                position="top-right"
-                toastOptions={{
-                    duration: 4000,
-                    style: {
-                        background: '#141414',
-                        color: '#fff',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                    },
-                }}
-            />
-            {!hideNavbar && <AdminToolbar user={user} />}
-            {!hideNavbar && <Navbar categories={categories} user={user} products={products} />}
-            {children}
-            {!hideNavbar && <Footer />}
+            <CartProvider>
+                <Toaster
+                    position="top-right"
+                    toastOptions={{
+                        duration: 4000,
+                        style: {
+                            background: '#141414',
+                            color: '#fff',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                        },
+                    }}
+                />
+                {!hideNavbar && <AdminToolbar user={user} />}
+                {!hideNavbar && <Navbar categories={categories} user={user} products={products} />}
+                {children}
+                {!hideNavbar && <Footer />}
+                
+                {/* Componentes da Sacola */}
+                {!hideNavbar && (
+                    <>
+                        <BagFloatingButton />
+                        <BagModal />
+                    </>
+                )}
+            </CartProvider>
         </SettingsProvider>
     );
 }

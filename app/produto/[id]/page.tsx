@@ -202,10 +202,9 @@ export default async function ProductDetailPage({ params }: Props) {
                             </div>
                         )}
 
-                        {/* Botão WhatsApp */}
+                        {/* Botão WhatsApp (Sacola) */}
                         <ProductContactButton
-                            productName={product.name}
-                            isAvailable={product.available}
+                            product={JSON.parse(JSON.stringify(product))}
                         />
                     </div>
                 </div>
